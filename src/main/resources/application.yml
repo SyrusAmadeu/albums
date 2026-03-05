@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: "albums"
+    cache:
+        ttl: 120
+        maxSize: 100
+
+server:
+    port: 8090
+
+album:
+    api:
+        url: "https://bands-api.vercel.app/api"
