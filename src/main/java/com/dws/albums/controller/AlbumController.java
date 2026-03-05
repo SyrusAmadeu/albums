@@ -28,7 +28,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AlbumController {
 
-	private IAlbumService iAlbumService;
+	private final IAlbumService iAlbumService;
 
 	@Operation(summary = "List all albums", description = "Returns all albums available.")
     @ApiResponses(value = {
@@ -43,7 +43,7 @@ public class AlbumController {
 		return ResponseEntity.status(HttpStatus.OK).body(albums);
 	}
 
-	 @Operation(summary = "Search a album by ID", description = "Returns album data")
+	@Operation(summary = "Search a album by ID", description = "Returns album data")
 	    @ApiResponses(value = {
 	        @ApiResponse(responseCode = "200", description = "Album Found"),
 	        @ApiResponse(responseCode = "400", description = "Error 400: Bad Request: Incorrect ID format",
@@ -60,13 +60,13 @@ public class AlbumController {
 	public ResponseEntity<Album> getAlbum(
             @PathVariable
             @Pattern(regexp = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-                     message = "The given id must be in the following format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+					message = "The given id must be in the following format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
             String albumId) {
 		Album album = iAlbumService.getAlbum(albumId);
 		return ResponseEntity.status(HttpStatus.OK).body(album);
 	}
 	
-	 @Operation(summary = "Clean albums cache", description = "Clean all albums cache")
+	@Operation(summary = "Clean albums cache", description = "Clean all albums cache")
 	    @ApiResponses(value = {
 	        @ApiResponse(responseCode = "204", description = "Cache cleaned")
 	    })
